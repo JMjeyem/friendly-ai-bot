@@ -1,8 +1,35 @@
-.body {
-    color: aqua;
+body {
+      height: 100vh; /* full height */
+      display: flex;
+      justify-content: center; /* center horizontally */
+      align-items: center;     /* center vertically */
+      background-color: #6c6f99; /* iyong background color */
+    }
+
+.title {
+    text-align: center;
+   
 }
 
+.card {
+  
+  width: 200px;        /* default: around 150px, adjust as you like */
+  padding: 20px;       /* dagdag space sa loob */
+  border-radius: 12px; /* medyo rounded */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* soft shadow */
+}
+.card-title {
+  text-align: center;
+  font-size: 1.2rem;   /* mas malaki ang pangalan */
+}
 .avatar {
-    width: 80px;
-    height: 80px;
+  
+  width: 100px;        /* dati 80px */
+  height: 100px;
+}
+
+@media (max-width: 576px) {
+  .card {
+    margin-bottom: 20px;
+  }
 }
