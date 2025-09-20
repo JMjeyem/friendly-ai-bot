@@ -97,6 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const userMessage = userInput.value.trim();
     if (userMessage === '') return;
 
+    // THIS RESET THE EXPANDED USER TEXT AREA INPUT
     appendMessage(userMessage, 'user');
     userInput.value = '';
     userInput.style.height = "40px"; // reset height after sending ✅
