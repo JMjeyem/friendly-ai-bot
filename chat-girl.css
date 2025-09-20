@@ -102,7 +102,7 @@ body {
 }
 
 .message.bot .message-content {
-    background-color: #3e3e40; /* Darker background for bot messages */
+    background-color: #c032b7; /* Darker background for bot messages */
     color: #e0e0e0;
     border-radius: 18px 18px 18px 5px; /* Creates the speech bubble shape with a small tail */
     margin-left: 35px; /* Adds space for the profile icon to be placed */
