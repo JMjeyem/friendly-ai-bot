@@ -94,14 +94,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     async function sendMessage() {
-        const userMessage = userInput.value.trim();
-        if (userMessage === '') return;
+    const userMessage = userInput.value.trim();
+    if (userMessage === '') return;
 
-        appendMessage(userMessage, 'user');
-        userInput.value = '';
+    appendMessage(userMessage, 'user');
+    userInput.value = '';
+    userInput.style.height = "40px"; // reset height after sending ✅
 
-        const loadingMessage = 'JMPS is typing<span class="typing-dots"></span>';
-        appendMessage(loadingMessage, 'bot', ['loading']);
+    const loadingMessage = 'JMPS is typing<span class="typing-dots"></span>';
+    appendMessage(loadingMessage, 'bot', ['loading']);
 
         // This loop will try all API keys one by one if they fail
         for (let i = 0; i < apiKeys.length; i++) {
