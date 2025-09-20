@@ -1,193 +1,282 @@
-  body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f0f2f5;
-            padding: 2rem;
-            min-height: 100vh;
-        }
+/* General body and container styles */
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background-color: #1a1a1a;
+    display: flex;
+    flex-direction: column; /* Stack children vertically */
+    min-height: 100vh;
+    margin: 0;
+    color: #e0e0e0;
+}
 
-        /* The floating chat button */
-        .chat-button {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 60px;
-            height: 60px;
-            background-color: #1a73e8; /* Google-like blue */
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-            cursor: pointer;
-            transition: transform 0.3s ease;
-            z-index: 1050; /* Above all Bootstrap components */
-        }
-        .chat-button:hover {
-            transform: scale(1.05);
-        }
+.chat-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1; /* This will make it take up all available space, pushing the footer down */
+}
 
-        /* The chat container itself, styled like the image */
-        .chat-container {
-            position: fixed;
-            bottom: 110px;
-            right: 30px;
-            width: 380px;
-            max-height: 600px;
-            background-color: white;
-            border-radius: 12px;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
-            display: none; /* Initially hidden */
-            flex-direction: column;
-            overflow: hidden;
-            z-index: 1050; /* Same as button to keep it on top */
-        }
+/* New Chat Header Styling */
+#chat-header {
+    background-color: #2c2c2e;
+    padding: 1rem;
+    display: flex; /* Makes it a flex container */
+    align-items: center; /* This centers the items vertically 🎯 */
+    justify-content: center; /* This centers the group of items horizontally */
+    border-bottom: 1px solid #444;
+}
 
-        /* Chat header styling */
-        .chat-header {
-            display: flex;
-            align-items: center;
-            padding: 1rem;
-            border-bottom: 1px solid #e0e0e0;
-            background-color: #f8f9fa;
-        }
-        .chat-header .chat-icon {
-            width: 40px;
-            height: 40px;
-            background-color: #e6f0ff;
-            color: #1a73e8;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-right: 0.75rem;
-        }
-        .chat-header .title {
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 0;
-            line-height: 1.2;
-        }
-        .chat-header .subtitle {
-            font-size: 0.8rem;
-            color: #666;
-        }
-        .chat-header .close-btn {
-            margin-left: auto;
-            border: none;
-            background: none;
-            font-size: 1.25rem;
-            color: #888;
-            cursor: pointer;
-        }
+.chat-logo {
+    width: 40px; /* Adjust the size as needed */
+    height: 40px;
+    margin-right: 15px; /* Adds space between the logo and the title */
+    border-radius: 50%; /* Optional: Makes the logo circular */
+    object-fit: cover; /* Ensures the image fills the space without distortion */
+}
 
-        /* Chat body for messages */
-        .chat-body {
-            flex-grow: 1;
-            padding: 1.25rem;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
+.chat-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #f0f0f0;
+    margin: 0;
+}
 
-        /* Styling for the messages */
-        .message {
-            max-width: 85%;
-            padding: 0.75rem 1rem;
-            border-radius: 15px;
-            font-size: 0.9rem;
-        }
-        .message.bot {
-            background-color: #0f0f0f;
-            align-self: flex-start;
-            border-top-left-radius: 5px;
-        }
-        .message.user {
-            background-color: #1a73e8;
-            color: white;
-            align-self: flex-end;
-            border-top-right-radius: 5px;
-        }
-        .message.loading {
-            background-color: #e0e0e0;
-            align-self: flex-start;
-            border-top-left-radius: 5px;
-            color: #444;
-            animation: pulse 1.5s infinite;
-        }
-        @keyframes pulse {
-            0% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.02); opacity: 0.8; }
-            100% { transform: scale(1); opacity: 1; }
-        }
+.chat-container {
+    width: 600px;
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    background-color: #2c2c2e;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+}
 
-        /* Chat input area */
-        .chat-input {
-            display: flex;
-            align-items: center;
-            padding: 0.5rem 1rem;
-            border-top: 1px solid #e0e0e0;
-            background-color: #f8f9fa;
-        }
-        .chat-input input {
-            flex-grow: 1;
-            border: 1px solid #ccc;
-            border-radius: 20px;
-            padding: 0.5rem 1rem;
-            font-size: 0.9rem;
-            outline: none;
-            background-color: white;
-        }
-        .chat-input button {
-            background: none;
-            border: none;
-            color: #1a73e8;
-            font-size: 1.25rem;
-            margin-left: 0.5rem;
-            cursor: pointer;
-        }
+/* Chat body where messages are displayed */
+.chat-body {
+    flex-grow: 1;
+    padding: 1.25rem;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
 
-        /* Responsive adjustments for smaller screens */
-        @media (max-width: 576px) {
-            .chat-container {
-                width: 90%;
-                bottom: 20px;
-                right: 5%;
-                left: 5%;
-            }
-            .chat-button {
-                bottom: 20px;
-                right: 20px;
-            }
+.meslink {
+    color: #00aaff; /* This is a bright blue color, you can change it */
+    text-decoration: none; /* Optional: Removes the underline from the link */
+}
 
-        .message.loading .message-content {
-        background-color: #555;
-        color: #aaa;
-        animation: pulse 1.5s infinite;
-        }
+/* Optional: To change color on hover */
+.meslink:hover {
+    color: #66ccff; /* Lighter color when the user hovers over the link */
+}
 
-        @keyframes pulse {
-            0% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.02); opacity: 0.8; }
-            100% { transform: scale(1); opacity: 1; }
-        }
+/* Styling for the message container */
+.message {
+    display: flex; /* Makes the message content and icon a flex container */
+    align-items: flex-start; /* Aligns the icon and text to the top */
+    gap: 10px; /* Space between the icon and the message bubble */
+    max-width: 85%; /* Limits the total width of the message bubble */
+    position: relative; /* Set position to relative for the icon to be positioned against it */
+}
+
+/* Styles for bot messages (left-aligned) */
+.message.bot {
+    align-self: flex-start;
+}
+
+/* Styles for user messages (right-aligned) */
+.message.user {
+    align-self: flex-end;
+    margin-left: auto; /* Pushes the user message to the right */
+}
+
+/* Styling for the actual message bubble content */
+.message-content {
+    padding: 10px 15px;
+    border-radius: 18px;
+    word-wrap: break-word;
+    word-break: break-word; /* To handle very long words */
+    max-width: 100%; /* Ensures the content doesn't overflow its container */
+}
+
+.message.bot .message-content {
+    background-color: #3e3e40; /* Darker background for bot messages */
+    color: #e0e0e0;
+    border-radius: 18px 18px 18px 5px; /* Creates the speech bubble shape with a small tail */
+    margin-left: 35px; /* Adds space for the profile icon to be placed */
+}
+
+.message.user .message-content {
+    background-color: #007bff; /* Blue background for user messages */
+    color: white;
+    border-radius: 18px 18px 0 18px; /* Creates the speech bubble shape */
+}
+
+/* New Typing Dots Animation */
+.typing-dots {
+    display: inline-block;
+}
+
+.typing-dots::after {
+    content: '';
+    overflow: hidden;
+    display: inline-block;
+    vertical-align: bottom;
+    animation: typing-dots-animation 1s steps(1) infinite;
+}
+
+@keyframes typing-dots-animation {
+    0% { content: '.'; }
+    33% { content: '..'; }
+    66% { content: '...'; }
+}
+
+.message.loading .message-content {
+    background-color: #555;
+    color: #aaa;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.02); opacity: 0.8; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+/* Bot Icon styling */
+.bot-icon {
+    width: 30px; /* Set a fixed width for the icon */
+    height: 30px; /* Set a fixed height for the icon */
+    border-radius: 50%; /* Makes the icon circular */
+    overflow: hidden; /* Ensures the image is clipped to the circular shape */
+    flex-shrink: 0; /* Prevents the icon from shrinking on smaller screens */
+    position: absolute; /* Allows for precise positioning within the parent */
+    bottom: -5px; /* Positions the icon just below the bottom edge of the message container */
+    left: -5px; /* Positions the icon just to the left of the message container */
+}
+
+.bot-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Chat input area */
+.chat-input {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    border-top: 1px solid #444; /* Darker border for a better look */
+    background-color: #2c2c2e;
+}
+
+.chat-input input {
+    flex-grow: 1;
+    border: none;
+    border-radius: 20px;
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    outline: none;
+    color: #e0e0e0;
+    background-color: #3e3e40;
+}
+
+/* This targets the placeholder text specifically */
+.chat-input input::placeholder {
+    color: #a0a0a0;
+    opacity: 1;
+}
+
+.chat-input button {
+    background: none;
+    border: none;
+    color: #1a73e8;
+    font-size: 1.25rem;
+    margin-left: 0.5rem;
+    cursor: pointer;
+}
+
+/* BATTERY CHARGING ANIMATION */
+.battery-vertical {
+  width: 20px;
+  height: 40px;
+  border: 2px solid #333;
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end; /* so charging starts at bottom */
+}
+
+.battery-vertical::after {
+  content: '';
+  position: absolute;
+  top: -6px;
+  left: 6px;
+  width: 8px;
+  height: 4px;
+  background: #333;
+  border-radius: 2px;
+}
+
+.charge-vertical {
+  width: 100%;
+  height: 0%;
+  background: limegreen;
+  animation: charging-vertical 2s infinite;
+}
+
+@keyframes charging-vertical {
+  0%   { height: 0%; }
+  50%  { height: 100%; }
+  100% { height: 0%; }
+}
 
 
-        }
 
-        .typing-dots {
-        display: inline-block;
-        overflow: hidden;
-        vertical-align: bottom;
-        animation: typing-dots-animation 1s infinite;
-        }
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+    .chat-container {
+        width: 90%;
+        height: 90vh;
+        margin: auto;
+    }
+}
 
-        @keyframes typing-dots-animation {
-        0% { width: 0; }
-        33% { width: 0.5em; }
-        66% { width: 1em; }
-        100% { width: 1.5em; }
-        }
+@media (max-width: 576px) {
+    .chat-container {
+        width: 100%;
+        height: 100vh;
+        border-radius: 0;
+        box-shadow: none;
+    }
+    .chat-body {
+        padding: 0.75rem;
+    }
+    .chat-input {
+        padding: 0.5rem;
+    }
+    .chat-input input {
+        padding: 0.5rem 0.75rem;
+    }
+}
 
-        
+/* General responsive styles for all elements */
+* {
+    box-sizing: border-box;
+}
+
+/* Footer Styles */
+.all-rights {
+    width: 100%;
+    text-align: center;
+    padding: 20px 0;
+}
+
+.all-rights footer p {
+    font-size: 0.8rem;
+    color: #a0a0a0; /* This is a light gray color */
+    margin: 0;
+}
