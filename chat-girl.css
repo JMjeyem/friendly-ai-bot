@@ -62,6 +62,27 @@ body {
     gap: 1rem;
 }
 
+.chat-input textarea {
+  flex-grow: 1;
+  border: none;
+  border-radius: 20px;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  outline: none;
+  color: #e0e0e0;
+  background-color: #3e3e40;
+  resize: none;          /* prevent manual drag */
+  overflow-y: hidden;    /* hide scrollbar until needed */
+  max-height: 200px;     /* stop growing too big */
+}
+
+/* Placeholder color */
+.chat-input textarea::placeholder {
+  color: #a0a0a0;
+  opacity: 1;
+}
+
+
 .meslink {
     color: #00aaff; /* This is a bright blue color, you can change it */
     text-decoration: none; /* Optional: Removes the underline from the link */

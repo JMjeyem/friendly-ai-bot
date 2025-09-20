@@ -84,7 +84,14 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Add this new event listener to scroll as the user types
-    userInput.addEventListener('input', scrollToBottom);
+    // userInput.addEventListener('input', scrollToBottom);
+
+    // Auto-expand textarea like Messenger
+    userInput.addEventListener("input", function () {
+        this.style.height = "auto";               // reset
+        this.style.height = (this.scrollHeight) + "px"; // expand to fit
+    });
+
 
     async function sendMessage() {
         const userMessage = userInput.value.trim();
